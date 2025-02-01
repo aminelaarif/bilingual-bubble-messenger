@@ -13,13 +13,23 @@ const translations: Translations = {
     welcome: 'Bienvenue',
     send: 'Envoyer',
     placeholder: 'Écrivez votre message...',
-    // Add more translations as needed
+    projectStatus: 'Statut du projet',
+    professionals: 'Professionnels Partenaires',
+    technicians: 'Techniciens Affectés',
+    interventions: 'Interventions Planifiées',
+    notifications: 'Notifications',
+    projectTracking: 'Suivi de Projet',
   },
   en: {
     welcome: 'Welcome',
     send: 'Send',
     placeholder: 'Type your message...',
-    // Add more translations as needed
+    projectStatus: 'Project Status',
+    professionals: 'Partner Professionals',
+    technicians: 'Assigned Technicians',
+    interventions: 'Planned Interventions',
+    notifications: 'Notifications',
+    projectTracking: 'Project Tracking',
   },
 };
 
