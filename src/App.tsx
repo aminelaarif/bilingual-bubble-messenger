@@ -4,7 +4,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/hooks/useLanguage";
+import { ThemeProvider } from "@/hooks/useTheme";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { Navbar } from "@/components/Navbar";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Projects from "./pages/Projects";
@@ -19,28 +21,32 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <LanguageProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <SidebarProvider>
-            <div className="flex min-h-screen w-full">
-              <ProjectSidebar />
-              <main className="flex-1">
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/projects" element={<Projects />} />
-                  <Route path="/project/:id" element={<ProjectDashboard />} />
-                  <Route path="/professionals" element={<Professionals />} />
-                  <Route path="/technicians" element={<Technicians />} />
-                  <Route path="/interventions" element={<Interventions />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </main>
-            </div>
-          </SidebarProvider>
-        </BrowserRouter>
-      </TooltipProvider>
+      <ThemeProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <SidebarProvider>
+              <div className="flex min-h-screen w-full">
+                <ProjectSidebar />
+                <div className="flex-1">
+                  <Navbar />
+                  <main className="mt-16">
+                    <Routes>
+                      <Route path="/projects" element={<Projects />} />
+                      <Route path="/project/:id" element={<ProjectDashboard />} />
+                      <Route path="/professionals" element={<Professionals />} />
+                      <Route path="/technicians" element={<Technicians />} />
+                      <Route path="/interventions" element={<Interventions />} />
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </main>
+                </div>
+              </div>
+            </SidebarProvider>
+          </BrowserRouter>
+        </TooltipProvider>
+      </ThemeProvider>
     </LanguageProvider>
   </QueryClientProvider>
 );

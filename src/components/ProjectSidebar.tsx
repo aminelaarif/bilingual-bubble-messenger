@@ -8,18 +8,15 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Home, FileText, Users, HardHat, Calendar, Building2 } from "lucide-react";
+import { FileText, Users, HardHat, Calendar, Building2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/hooks/useLanguage";
 
 export function ProjectSidebar() {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const menuItems = [
-    {
-      title: "Accueil",
-      icon: Home,
-      path: "/",
-    },
     {
       title: "Projets",
       icon: FileText,
