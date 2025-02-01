@@ -9,7 +9,7 @@ const dummyProjects = {
   "1": {
     id: 1,
     name: "Rénovation Appartement Paris",
-    status: "en cours",
+    status: "inProgress",
     client: "M. Dubois",
     startDate: "2024-01-15",
     professionals: [
@@ -46,7 +46,7 @@ const ProjectDashboard = () => {
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">{project.name}</h1>
         <Badge variant="outline" className="text-lg px-4 py-1">
-          {project.status.toUpperCase()}
+          {t(project.status)}
         </Badge>
       </div>
 
@@ -55,7 +55,7 @@ const ProjectDashboard = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Building2 className="h-5 w-5" />
-              Professionnels Partenaires
+              {t('professionals')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -63,8 +63,10 @@ const ProjectDashboard = () => {
               {project.professionals.map((pro) => (
                 <div key={pro.id} className="mb-4 p-3 bg-accent/10 rounded-lg">
                   <div className="font-medium">{pro.name}</div>
-                  <div className="text-sm text-muted-foreground">{pro.role} - {pro.company}</div>
-                  <div className="text-sm text-muted-foreground">{pro.contact}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {t('role')}: {pro.role} - {t('company')}: {pro.company}
+                  </div>
+                  <div className="text-sm text-muted-foreground">{t('contact')}: {pro.contact}</div>
                 </div>
               ))}
             </ScrollArea>
@@ -75,7 +77,7 @@ const ProjectDashboard = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <HardHat className="h-5 w-5" />
-              Techniciens Affectés
+              {t('technicians')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -83,9 +85,15 @@ const ProjectDashboard = () => {
               {project.technicians.map((tech) => (
                 <div key={tech.id} className="mb-4 p-3 bg-accent/10 rounded-lg">
                   <div className="font-medium">{tech.name}</div>
-                  <div className="text-sm text-muted-foreground">{tech.speciality}</div>
-                  <div className="text-sm text-muted-foreground">Disponibilité: {tech.availability}</div>
-                  <div className="text-sm text-muted-foreground">{tech.contact}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {t('speciality')}: {tech.speciality}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {t('availability')}: {tech.availability}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {t('contact')}: {tech.contact}
+                  </div>
                 </div>
               ))}
             </ScrollArea>
@@ -96,7 +104,7 @@ const ProjectDashboard = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Calendar className="h-5 w-5" />
-              Interventions Planifiées
+              {t('interventions')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -105,10 +113,10 @@ const ProjectDashboard = () => {
                 <div key={intervention.id} className="mb-4 p-3 bg-accent/10 rounded-lg">
                   <div className="font-medium">{intervention.type}</div>
                   <div className="text-sm text-muted-foreground">
-                    Date: {new Date(intervention.date).toLocaleDateString('fr-FR')}
+                    {t('date')}: {new Date(intervention.date).toLocaleDateString()}
                   </div>
                   <div className="text-sm text-muted-foreground">
-                    Technicien: {intervention.technician}
+                    {t('technician')}: {intervention.technician}
                   </div>
                 </div>
               ))}
@@ -120,7 +128,7 @@ const ProjectDashboard = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Bell className="h-5 w-5" />
-              Notifications
+              {t('notifications')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -134,7 +142,7 @@ const ProjectDashboard = () => {
                 >
                   <div className="font-medium">{notif.message}</div>
                   <div className="text-sm text-muted-foreground">
-                    {new Date(notif.date).toLocaleDateString('fr-FR')}
+                    {new Date(notif.date).toLocaleDateString()}
                   </div>
                 </div>
               ))}

@@ -8,21 +8,21 @@ const dummyProjects = [
   {
     id: 1,
     name: "Rénovation Appartement Paris",
-    status: "en cours",
+    status: "inProgress",
     client: "M. Dubois",
     startDate: "2024-01-15",
   },
   {
     id: 2,
     name: "Construction Maison Lyon",
-    status: "en attente",
+    status: "pending",
     client: "Mme. Martin",
     startDate: "2024-02-01",
   },
   {
     id: 3,
     name: "Extension Bureau Marseille",
-    status: "terminé",
+    status: "completed",
     client: "SARL TechPro",
     startDate: "2023-12-01",
   },
@@ -34,7 +34,7 @@ const Projects = () => {
 
   return (
     <div className="p-6 space-y-6">
-      <h1 className="text-3xl font-bold">Projets</h1>
+      <h1 className="text-3xl font-bold">{t('projects')}</h1>
       <div className="grid gap-4">
         {dummyProjects.map((project) => (
           <Card 
@@ -45,13 +45,13 @@ const Projects = () => {
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-xl">{project.name}</CardTitle>
               <Badge variant="outline" className="text-sm">
-                {project.status.toUpperCase()}
+                {t(project.status)}
               </Badge>
             </CardHeader>
             <CardContent>
               <div className="text-sm text-muted-foreground">
-                <p>Client: {project.client}</p>
-                <p>Date de début: {new Date(project.startDate).toLocaleDateString('fr-FR')}</p>
+                <p>{t('client')}: {project.client}</p>
+                <p>{t('startDate')}: {new Date(project.startDate).toLocaleDateString()}</p>
               </div>
             </CardContent>
           </Card>
