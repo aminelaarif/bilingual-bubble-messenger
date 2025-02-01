@@ -3,40 +3,50 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Users, Bell, Building2, HardHat } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useParams } from "react-router-dom";
 
-const dummyData = {
-  professionals: [
-    { id: 1, name: "Marie Durant", role: "Architecte", company: "Archi Design", contact: "marie@archidesign.fr" },
-    { id: 2, name: "Thomas Bernard", role: "BET Structure", company: "IngeConsult", contact: "t.bernard@ingeconsult.fr" },
-    { id: 3, name: "Laurent Petit", role: "Construction", company: "BâtiPro", contact: "l.petit@batipro.fr" }
-  ],
-  technicians: [
-    { id: 1, name: "Jean Martin", speciality: "Électricité", availability: "Lun-Ven", contact: "j.martin@ar-eng.fr" },
-    { id: 2, name: "Sophie Dubois", speciality: "Plomberie", availability: "Mar-Sam", contact: "s.dubois@ar-eng.fr" },
-    { id: 3, name: "Pierre Leroy", speciality: "HVAC", availability: "Lun-Ven", contact: "p.leroy@ar-eng.fr" }
-  ],
-  interventions: [
-    { id: 1, date: "2024-03-20", type: "Visite technique", technician: "Jean Martin" },
-    { id: 2, date: "2024-03-25", type: "Installation", technician: "Sophie Dubois" },
-    { id: 3, date: "2024-04-02", type: "Maintenance", technician: "Pierre Leroy" }
-  ],
-  notifications: [
-    { id: 1, message: "Étape de conception validée", date: "2024-03-15", read: false },
-    { id: 2, message: "Intervention confirmée pour le 20/03", date: "2024-03-16", read: false },
-    { id: 3, message: "Nouveau document disponible", date: "2024-03-17", read: true }
-  ]
+const dummyProjects = {
+  "1": {
+    id: 1,
+    name: "Rénovation Appartement Paris",
+    status: "en cours",
+    client: "M. Dubois",
+    startDate: "2024-01-15",
+    professionals: [
+      { id: 1, name: "Marie Durant", role: "Architecte", company: "Archi Design", contact: "marie@archidesign.fr" },
+      { id: 2, name: "Thomas Bernard", role: "BET Structure", company: "IngeConsult", contact: "t.bernard@ingeconsult.fr" },
+    ],
+    technicians: [
+      { id: 1, name: "Jean Martin", speciality: "Électricité", availability: "Lun-Ven", contact: "j.martin@ar-eng.fr" },
+      { id: 2, name: "Sophie Dubois", speciality: "Plomberie", availability: "Mar-Sam", contact: "s.dubois@ar-eng.fr" },
+    ],
+    interventions: [
+      { id: 1, date: "2024-03-20", type: "Visite technique", technician: "Jean Martin" },
+      { id: 2, date: "2024-03-25", type: "Installation", technician: "Sophie Dubois" },
+    ],
+    notifications: [
+      { id: 1, message: "Étape de conception validée", date: "2024-03-15", read: false },
+      { id: 2, message: "Intervention confirmée pour le 20/03", date: "2024-03-16", read: false },
+    ],
+  },
+  // Add more projects as needed
 };
 
 const ProjectDashboard = () => {
   const { t } = useLanguage();
-  const projectStatus = "en cours";
+  const { id } = useParams();
+  const project = dummyProjects[id as keyof typeof dummyProjects];
+
+  if (!project) {
+    return <div className="p-6">Projet non trouvé</div>;
+  }
 
   return (
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Suivi de Projet</h1>
+        <h1 className="text-3xl font-bold">{project.name}</h1>
         <Badge variant="outline" className="text-lg px-4 py-1">
-          {projectStatus.toUpperCase()}
+          {project.status.toUpperCase()}
         </Badge>
       </div>
 
@@ -50,7 +60,7 @@ const ProjectDashboard = () => {
           </CardHeader>
           <CardContent>
             <ScrollArea className="h-[200px]">
-              {dummyData.professionals.map((pro) => (
+              {project.professionals.map((pro) => (
                 <div key={pro.id} className="mb-4 p-3 bg-accent/10 rounded-lg">
                   <div className="font-medium">{pro.name}</div>
                   <div className="text-sm text-muted-foreground">{pro.role} - {pro.company}</div>
@@ -70,7 +80,7 @@ const ProjectDashboard = () => {
           </CardHeader>
           <CardContent>
             <ScrollArea className="h-[200px]">
-              {dummyData.technicians.map((tech) => (
+              {project.technicians.map((tech) => (
                 <div key={tech.id} className="mb-4 p-3 bg-accent/10 rounded-lg">
                   <div className="font-medium">{tech.name}</div>
                   <div className="text-sm text-muted-foreground">{tech.speciality}</div>
@@ -91,7 +101,7 @@ const ProjectDashboard = () => {
           </CardHeader>
           <CardContent>
             <ScrollArea className="h-[200px]">
-              {dummyData.interventions.map((intervention) => (
+              {project.interventions.map((intervention) => (
                 <div key={intervention.id} className="mb-4 p-3 bg-accent/10 rounded-lg">
                   <div className="font-medium">{intervention.type}</div>
                   <div className="text-sm text-muted-foreground">
@@ -115,7 +125,7 @@ const ProjectDashboard = () => {
           </CardHeader>
           <CardContent>
             <ScrollArea className="h-[200px]">
-              {dummyData.notifications.map((notif) => (
+              {project.notifications.map((notif) => (
                 <div 
                   key={notif.id} 
                   className={`mb-4 p-3 rounded-lg ${

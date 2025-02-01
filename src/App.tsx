@@ -7,7 +7,11 @@ import { LanguageProvider } from "@/hooks/useLanguage";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Projects from "./pages/Projects";
 import ProjectDashboard from "./pages/ProjectDashboard";
+import Professionals from "./pages/Professionals";
+import Technicians from "./pages/Technicians";
+import Interventions from "./pages/Interventions";
 import { ProjectSidebar } from "./components/ProjectSidebar";
 
 const queryClient = new QueryClient();
@@ -25,7 +29,11 @@ const App = () => (
               <main className="flex-1">
                 <Routes>
                   <Route path="/" element={<Index />} />
-                  <Route path="/project" element={<ProjectDashboard />} />
+                  <Route path="/projects" element={<Projects />} />
+                  <Route path="/project/:id" element={<ProjectDashboard />} />
+                  <Route path="/professionals" element={<Professionals />} />
+                  <Route path="/technicians" element={<Technicians />} />
+                  <Route path="/interventions" element={<Interventions />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>

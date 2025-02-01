@@ -8,7 +8,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Home, FileText, MessageSquare, Settings, Users } from "lucide-react";
+import { Home, FileText, Users, HardHat, Calendar, Building2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export function ProjectSidebar() {
@@ -21,24 +21,24 @@ export function ProjectSidebar() {
       path: "/",
     },
     {
-      title: "Suivi de Projet",
+      title: "Projets",
       icon: FileText,
-      path: "/project",
+      path: "/projects",
     },
     {
-      title: "Messages",
-      icon: MessageSquare,
-      path: "/messages",
+      title: "Professionnels Partenaires",
+      icon: Building2,
+      path: "/professionals",
     },
     {
-      title: "Équipe",
-      icon: Users,
-      path: "/team",
+      title: "Techniciens Affectés",
+      icon: HardHat,
+      path: "/technicians",
     },
     {
-      title: "Paramètres",
-      icon: Settings,
-      path: "/settings",
+      title: "Interventions Planifiées",
+      icon: Calendar,
+      path: "/interventions",
     },
   ];
 
