@@ -33,6 +33,7 @@ const App = () => (
                   <Navbar />
                   <main className="mt-16">
                     <Routes>
+                      <Route path="/" element={<Projects />} />
                       <Route path="/projects" element={<Projects />} />
                       <Route path="/project/:id" element={<ProjectDashboard />} />
                       <Route path="/professionals" element={<Professionals />} />
